@@ -25,6 +25,19 @@ app.get("/api/hello", function (req, res) {
   res.json({greeting: 'hello API'});
 });
 
+app.get("/api/whoami", function (req, res) {
+  console.log(req);
+  console.log(req.headers['x-forwarded-for']);
+  console.log(req.socket.remoteAddress);
+  console.log(req.ip);
+
+  res.json({
+    ipaddress: req.ip,
+    language: req.headers["accept-language"], //"en-US,en;q=0.9,ru-UA;q=0.8,ru;q=0.7"
+    software: req.headers["user-agent"] //"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.41 Safari/537.36"
+  });
+})
+
 
 
 // listen for requests :)
